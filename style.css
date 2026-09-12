@@ -1,9 +1,8 @@
-/* Mengatur font utama menggunakan Inter */
+/* STREAMING_CHUNK:Configuring custom styles and transitions... */
 body {
 font-family: 'Inter', sans-serif;
 }
 
-/* Transisi tambahan halus untuk elemen interaktif */
 button {
 transition: all 0.2s ease-in-out;
 }

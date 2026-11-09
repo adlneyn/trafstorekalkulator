@@ -1,8 +1,7 @@
-/* STREAMING_CHUNK:Configuring custom styles and transitions... */
-body {
-font-family: 'Inter', sans-serif;
+    body {
+    font-family: 'Inter', sans-serif;
 }
 
 button {
-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }

@@ -8,12 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Hubungkan Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-4">
 
-    <div class="w-full max-w-xl bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 p-6 md:p-8">
+    <div class="w-full max-w-xl bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 p-6 md:p-8 my-8">
         
         <div class="text-center mb-6">
             <h1 class="text-2xl font-bold text-indigo-400">Kalkulator Tarif Harga Tebar</h1>
@@ -57,7 +56,7 @@
             </div>
 
             <!-- Fitur Tambahan (Add-on) -->
-            <div class="pt-2 border-t border-slate-700">
+            <div class="pt-4 border-t border-slate-700">
                 <label class="block text-sm font-medium text-slate-300 mb-3">Fitur Tambahan (Add-on)</label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <!-- Inrush (+100) -->
@@ -116,42 +115,57 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Fitur Potongan -->
+            <div class="pt-4 border-t border-slate-700">
+                <label class="block text-sm font-medium text-slate-300 mb-3">Diskon / Potongan Khusus</label>
+                <div class="flex items-center justify-between bg-rose-900/20 border border-rose-800/50 px-4 py-3 rounded-xl">
+                    <div>
+                        <span class="text-sm font-medium text-rose-300">Potong Gaji 20%</span>
+                        <span class="block text-xs text-slate-400">Kurangi 20% dari total tagihan akhir</span>
+                    </div>
+                    <button type="button" id="btn-potongGaji" onclick="togglePotongGaji()" class="w-12 h-6 flex items-center bg-slate-600 rounded-full p-1 transition duration-300 focus:outline-none shadow-inner">
+                        <div id="toggle-potongGaji" class="bg-white w-4 h-4 rounded-full shadow-md transform transition duration-300"></div>
+                    </button>
+                </div>
+            </div>
+
         </div>
 
         <!-- Bagian Hasil Total -->
-        <div class="mt-6 bg-slate-900/60 border border-indigo-500/30 rounded-2xl p-5 text-center">
+        <div class="mt-8 bg-slate-900/60 border border-indigo-500/30 rounded-2xl p-5 text-center shadow-inner">
             <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Estimasi Harga Total</span>
-            <div id="result-price" class="text-3xl md:text-4xl font-extrabold text-emerald-400 mt-2">0</div>
-            <div id="result-detail" class="text-xs text-slate-400 mt-1">-</div>
+            <div id="result-price" class="text-3xl md:text-5xl font-extrabold text-emerald-400 mt-2 tracking-tight">0</div>
+            <div id="result-detail" class="text-xs text-slate-400 mt-3 leading-relaxed">-</div>
         </div>
 
-        <div class="mt-5 text-center">
-            <button onclick="toggleTable()" class="text-xs text-indigo-400 hover:underline focus:outline-none">Lihat Tabel Referensi Tarif Lengkap</button>
+        <div class="mt-6 text-center">
+            <button onclick="toggleTable()" class="text-sm text-indigo-400 hover:text-indigo-300 hover:underline focus:outline-none font-medium transition-colors">Lihat Tabel Referensi Tarif Lengkap</button>
         </div>
     </div>
 
     <!-- Modal Tabel Referensi -->
-    <div id="modal-table" class="fixed inset-0 bg-black/70 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-slate-800 border border-slate-700 w-full max-w-4xl max-h-[80vh] rounded-2xl flex flex-col p-6 shadow-2xl">
+    <div id="modal-table" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50 transition-opacity">
+        <div class="bg-slate-800 border border-slate-700 w-full max-w-4xl max-h-[85vh] rounded-2xl flex flex-col p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modal-title-text" class="text-lg font-bold text-slate-200">Tabel Tarif Lengkap</h3>
-                <button onclick="toggleTable()" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+                <button onclick="toggleTable()" class="text-slate-400 hover:text-white text-3xl font-light leading-none focus:outline-none">&times;</button>
             </div>
-            <div class="overflow-x-auto flex-1 border border-slate-700 rounded-xl">
-                <table class="w-full text-left text-xs text-slate-300">
-                    <thead class="bg-slate-700 text-slate-200 uppercase sticky top-0">
+            <div class="overflow-x-auto flex-1 border border-slate-700 rounded-xl bg-slate-900/50">
+                <table class="w-full text-left text-sm text-slate-300 whitespace-nowrap">
+                    <thead class="bg-slate-800 text-slate-200 uppercase text-xs tracking-wider sticky top-0 shadow-sm">
                         <tr>
-                            <th class="p-3">Grup</th>
-                            <th class="p-3">1 H</th>
-                            <th class="p-3">2 H</th>
-                            <th class="p-3">3 H</th>
-                            <th class="p-3">4 H</th>
-                            <th class="p-3">5 H</th>
-                            <th class="p-3">6 H</th>
-                            <th class="p-3">7 H</th>
+                            <th class="p-4 font-semibold">Grup</th>
+                            <th class="p-4 font-semibold">1 H</th>
+                            <th class="p-4 font-semibold">2 H</th>
+                            <th class="p-4 font-semibold">3 H</th>
+                            <th class="p-4 font-semibold">4 H</th>
+                            <th class="p-4 font-semibold">5 H</th>
+                            <th class="p-4 font-semibold">6 H</th>
+                            <th class="p-4 font-semibold">7 H</th>
                         </tr>
                     </thead>
-                    <tbody id="table-body" class="divide-y divide-slate-700">
+                    <tbody id="table-body" class="divide-y divide-slate-700/50">
                         <!-- Diisi otomatis via JavaScript -->
                     </tbody>
                 </table>
@@ -159,7 +173,5 @@
         </div>
     </div>
 
-    <!-- Hubungkan Custom JavaScript -->
-    <script src="script.js"></script>
 </body>
 </html>
